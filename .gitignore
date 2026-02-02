@@ -1,24 +1,114 @@
-# Nestjs specific
-/dist
-/node_modules
-/build
-/tmp
+##################################
+# GENERAL
+##################################
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
 
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
-pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-lerna-debug.log*
+pnpm-debug.log*
 
-# dotenv environment variable files
+##################################
+# ENVIRONMENT VARIABLES
+##################################
+
 .env
-.env.development
-.env.test
-.env.production
+.env.*
+!.env.example
 
-# temp directory
-.temp
-.tmp
+##################################
+# NODE / NESTJS / REACT
+##################################
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# Cache / temp
+.tmp/
+.temp/
+.cache/
+.next/
+out/
+
+##################################
+# FLUTTER
+##################################
+
+# Flutter/Dart tool files
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Build outputs
+build/
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+android/.gradle/
+android/app/build/
+
+##################################
+# ANDROID
+##################################
+
+*.apk
+*.aab
+*.keystore
+key.properties
+
+##################################
+# IOS
+##################################
+
+*.xcuserstate
+*.xcuserdata/
+ios/Pods/
+ios/.symlinks/
+ios/Runner/GeneratedPluginRegistrant.*
+
+##################################
+# MONGODB (LOCAL DEV ONLY)
+##################################
+
+# Local database files (if using local Mongo)
+data/db/
+mongo-data/
+
+##################################
+# AWS / S3 / SECRETS
+##################################
+
+# AWS credentials
+.aws/
+aws-credentials.json
+
+##################################
+# TESTING
+##################################
+
+coverage/
+test-results/
+
+##################################
+# MISC
+##################################
+
+*.iml
