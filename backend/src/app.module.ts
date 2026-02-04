@@ -16,12 +16,16 @@ import { UsersModule } from './users/users.module';
     }),
     MongooseModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGO_URI'),
-      }),
+      useFactory: (configService: ConfigService) => {
+        const uri = configService.get<string>('database.mongoUri');
+        console.log('🔥 CONNECTING TO MONGO:', uri);
+        return { uri };
+      },
     }),
     HealthModule,
     UsersModule,
   ],
 })
+
+
 export class AppModule {}
