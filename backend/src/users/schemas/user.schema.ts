@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { HydratedDocument } from 'mongoose';
 
-export type UserDocument = User & Document;
+export type UserDocument = HydratedDocument<User>;
 
 export enum UserRole {
   USER = 'USER',
@@ -28,7 +28,6 @@ export class User {
     default: UserRole.USER,
   })
   role: UserRole;
-
   @Prop({ trim: true })
   name?: string;
 }

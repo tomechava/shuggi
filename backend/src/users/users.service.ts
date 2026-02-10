@@ -15,25 +15,18 @@ export class UsersService {
         email: string,
         password: string,
         name?: string,
-    ): Promise<User> {
-        const existingUser = await this.userModel.findOne({email});
-
-        if (existingUser) {
-            throw new Error('User with this email already exists');
-        }
-
-        const passwordHash = await bcrypt.hash(password, 10);
-
+    ): Promise<UserDocument> {
+        const hashedPassword = await bcrypt.hash(password, 10);
         const user = new this.userModel({
             email,
-            passwordHash,
+            passwordHash: hashedPassword,
             name,
         });
 
         return user.save();
     }
 
-    async findByEmail(email: string): Promise<User | null> {
+    async findByEmail(email: string): Promise<UserDocument | null> {
         return this.userModel.findOne({ email }).exec();
     }
 
