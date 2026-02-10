@@ -6,4 +6,5 @@ export const envValidationSchema = Joi.object({
     .valid('development', 'test', 'production')
     .default('development'),
   MONGO_URI: Joi.string().required(),
+  JWT_SECRET: Joi.string().required(),
 });
