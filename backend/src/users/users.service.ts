@@ -33,4 +33,8 @@ export class UsersService {
     async findById(id: string): Promise<User | null> {
         return this.userModel.findById(id).exec();
     }
+
+    async findAll(): Promise<User[]> {
+        return this.userModel.find().exec();
+    }
 }

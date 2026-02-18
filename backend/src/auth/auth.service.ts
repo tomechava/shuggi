@@ -6,40 +6,43 @@ import { UserDocument } from 'src/users/schemas/user.schema';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private readonly usersService: UsersService,
-    private readonly jwtService: JwtService,
-  ) {}
+    constructor(
+        private readonly usersService: UsersService,
+        private readonly jwtService: JwtService,
+    ) {}
 
-  async register(dto: any) {
+    async register(dto: any) {
     const user: UserDocument = await this.usersService.create(
       dto.email,
       dto.password,
       dto.name,
     );
 
-    return this.signToken(user.id); 
-  }
-
-  async login(dto: any) {
-    const user: UserDocument | null = await this.usersService.findByEmail(dto.email);
-
-    if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
+        return this.signToken(user); 
     }
 
-    const valid = await bcrypt.compare(dto.password, user.passwordHash);
+    async login(dto: any) {
+        const user: UserDocument | null = await this.usersService.findByEmail(dto.email);
 
-    if (!valid) {
-      throw new UnauthorizedException('Invalid credentials');
+        if (!user) {
+        throw new UnauthorizedException('Invalid credentials');
+        }
+
+        const valid = await bcrypt.compare(dto.password, user.passwordHash);
+
+        if (!valid) {
+        throw new UnauthorizedException('Invalid credentials');
+        }
+
+        return this.signToken(user); 
     }
 
-    return this.signToken(user.id); 
-  }
-
-  private signToken(userId: string) {
-    return {
-      accessToken: this.jwtService.sign({ sub: userId }),
-    };
-  }
+    private signToken(user: UserDocument) {
+        return {
+            accessToken: this.jwtService.sign({
+                sub: user.id,
+                role: user.role,
+        }),
+        };
+    }
 }
