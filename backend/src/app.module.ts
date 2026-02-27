@@ -7,6 +7,7 @@ import { HealthModule } from './health/health.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { StoresModule } from './stores/stores.module';
+import { PacksModule } from './packs/packs.module';
 
 
 @Module({
@@ -28,6 +29,7 @@ import { StoresModule } from './stores/stores.module';
     UsersModule,
     AuthModule,
     StoresModule,
+    PacksModule,
   ],
 })
 
