@@ -73,7 +73,7 @@ export class CreatePackDto {
     originalPrice: number;
 
     @IsNumber()
-    @Min(0)
+    @Min(10000, { message: 'Discounted price must be at least $10.000 COP (PayU minimum transaction amount)' })
     discountedPrice: number;
 
     @ValidateNested()
