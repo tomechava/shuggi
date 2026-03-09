@@ -135,6 +135,26 @@ export class OrdersController {
     }
 
     /**
+ * TESTING ONLY: Simulate payment confirmation
+ * POST /orders/:id/simulate-payment
+ * TODO: Remove in production - this will be replaced by PayU webhook
+ */
+    @Post(':id/simulate-payment')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
+    async simulatePayment(@Param('id') id: string) {
+        const mockTransactionId = `PAYU-TEST-${Date.now()}`;
+        const mockResponse = {
+            state_pol: 4, // APPROVED
+            response_code_pol: 1,
+            reference_sale: id,
+            transaction_date: new Date().toISOString(),
+        };
+
+        return this.ordersService.markAsPaid(id, mockTransactionId, mockResponse);
+    }
+
+    /**
      * SYSTEM: Expire unpaid orders (for cron job testing)
      * POST /orders/system/expire-unpaid
      * TODO: Protect with API key or remove in production
@@ -155,4 +175,5 @@ export class OrdersController {
         const count = await this.ordersService.markNoShows();
         return { message: `${count} orders marked as NO_SHOW` };
     }
+
 }
