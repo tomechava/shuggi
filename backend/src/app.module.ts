@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { StoresModule } from './stores/stores.module';
 import { PacksModule } from './packs/packs.module';
+import { OrdersModule } from './orders/orders.module';
 
 
 @Module({
@@ -30,6 +31,7 @@ import { PacksModule } from './packs/packs.module';
     AuthModule,
     StoresModule,
     PacksModule,
+    OrdersModule,
   ],
 })
 
