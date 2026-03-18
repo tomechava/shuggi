@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { StoresModule } from './stores/stores.module';
 import { PacksModule } from './packs/packs.module';
 import { OrdersModule } from './orders/orders.module';
+import { PaymentsModule } from './payments/payments.module';
 
 
 @Module({
@@ -32,6 +33,7 @@ import { OrdersModule } from './orders/orders.module';
     StoresModule,
     PacksModule,
     OrdersModule,
+    PaymentsModule,
   ],
 })
 

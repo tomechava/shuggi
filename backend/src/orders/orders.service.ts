@@ -29,11 +29,11 @@ export class OrdersService {
         private configService: ConfigService,
     ) {
         // Load configuration
-        this.paymentTimeoutMinutes = this.configService.get<number>('PAYMENT_TIMEOUT_MINUTES', 15);
-        this.gatewayPercentageFee = this.configService.get<number>('PAYMENT_GATEWAY_PERCENTAGE_FEE', 0.0392);
-        this.gatewayFixedFee = this.configService.get<number>('PAYMENT_GATEWAY_FIXED_FEE', 300);
-        this.platformCommissionRate = this.configService.get<number>('PLATFORM_COMMISSION_RATE', 0.10);
-        this.freeCancellationHours = this.configService.get<number>('FREE_CANCELLATION_HOURS', 24);
+        this.paymentTimeoutMinutes = Number(this.configService.get<number>('PAYMENT_TIMEOUT_MINUTES', 15));
+        this.gatewayPercentageFee = Number(this.configService.get<number>('PAYMENT_GATEWAY_PERCENTAGE_FEE', 0.0392));
+        this.gatewayFixedFee = Number(this.configService.get<number>('PAYMENT_GATEWAY_FIXED_FEE', 300));
+        this.platformCommissionRate = Number(this.configService.get<number>('PLATFORM_COMMISSION_RATE', 0.10));
+        this.freeCancellationHours = Number(this.configService.get<number>('FREE_CANCELLATION_HOURS', 24));
     }
 
     /**
