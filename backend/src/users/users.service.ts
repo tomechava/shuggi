@@ -10,7 +10,7 @@ export class UsersService {
     constructor(
         @InjectModel(User.name)
         private readonly userModel: Model<UserDocument>,
-    ) {}
+    ) { }
 
     async create(
         email: string,
@@ -131,5 +131,46 @@ export class UsersService {
         user.passwordResetExpires = undefined;
 
         return user.save();
+    }
+
+    /**
+     * Sets a new verification token by userId (used by AuthService after
+     * registration, when we already have the user object and don't need
+     * a second DB lookup by email).
+     * Returns the raw token for inclusion in the email link.
+     */
+    async setVerificationToken(userId: string): Promise<string> {
+        const rawToken = crypto.randomBytes(32).toString('hex');
+
+        // Hash before storing — if DB is compromised, hashes are useless to attacker
+        const hashedToken = crypto
+            .createHash('sha256')
+            .update(rawToken)
+            .digest('hex');
+
+        await this.userModel.findByIdAndUpdate(userId, {
+            emailVerificationToken: hashedToken,
+            emailVerificationExpires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24h
+        });
+
+        return rawToken; // Raw goes in the email, never in the DB
+    }
+
+    /**
+     * Spam guard for resend verification. Back-calculates token issue time
+     * from the expiry timestamp and enforces a 5-minute cooldown.
+     * Returns true if the user must wait before requesting another email.
+     */
+    async hasRecentVerificationRequest(userId: string): Promise<boolean> {
+        const user = await this.userModel.findById(userId);
+        if (!user?.emailVerificationExpires) return false;
+
+        // issuedAt = expires - 24h. Cooldown ends at issuedAt + 5min.
+        const issuedAt = new Date(
+            user.emailVerificationExpires.getTime() - 24 * 60 * 60 * 1000,
+        );
+        const cooldownEndsAt = new Date(issuedAt.getTime() + 5 * 60 * 1000);
+
+        return new Date() < cooldownEndsAt;
     }
 }
