@@ -161,16 +161,18 @@ export class AuthService {
         };
     }
 
-    private signToken(user: UserDocument) {
+    signToken(user: UserDocument): { token: string; emailVerificationRequired: boolean } {
+        const token = this.jwtService.sign({
+            sub: user.id,
+            email: user.email,
+            role: user.role,
+            isEmailVerified: user.isEmailVerified,
+        });
+
         return {
-            accessToken: this.jwtService.sign({
-                sub: user.id,
-                email: user.email,
-                role: user.role,
-                isEmailVerified: user.isEmailVerified,
-            }),
-            // Frontend uses this to show "verify your email" banner without
-            // decoding the JWT or making an extra API call
+            token,
+            // Frontend usa este flag para mostrar banner "verifica tu email"
+            // sin necesidad de decodificar el JWT
             emailVerificationRequired: !user.isEmailVerified,
         };
     }
