@@ -9,6 +9,8 @@ import LoginPage from '@/features/auth/LoginPage';
 
 // Admin pages
 import StoresListPage from '@/features/admin/stores/StoresListPage';
+import StoreDetailPage from '@/features/admin/stores/StoreDetailPage';
+import CreateStorePage from '@/features/admin/stores/CreateStorePage';
 
 // Placeholders
 const Placeholder = ({ title }: { title: string }) => (
@@ -49,8 +51,8 @@ const router = createBrowserRouter([
                 children: [
                     { path: 'dashboard', element: <Placeholder title="Admin Dashboard" /> },
                     { path: 'stores', element: <StoresListPage /> },
-                    { path: 'stores/new', element: <Placeholder title="Create Store" /> },
-                    { path: 'stores/:id', element: <Placeholder title="Store Detail" /> },
+                    { path: 'stores/new', element: <CreateStorePage /> },
+                    { path: 'stores/:id', element: <StoreDetailPage /> },
                     { path: 'users', element: <Placeholder title="Users List" /> },
                     { path: 'users/new', element: <Placeholder title="Create User" /> },
                     { path: 'packs', element: <Placeholder title="Admin Packs" /> },
