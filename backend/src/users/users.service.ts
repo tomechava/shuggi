@@ -1,7 +1,7 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User, UserDocument } from './schemas/user.schema';
+import { User, UserDocument, UserRole } from './schemas/user.schema';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
 
@@ -172,5 +172,26 @@ export class UsersService {
         const cooldownEndsAt = new Date(issuedAt.getTime() + 5 * 60 * 1000);
 
         return new Date() < cooldownEndsAt;
+    }
+
+    /**
+ * ADMIN: Create user with specific role
+ * Admin-created users skip email verification
+ */
+    async createWithRole(
+        email: string,
+        password: string,
+        name: string,
+        role: UserRole = UserRole.USER,
+    ): Promise<UserDocument> {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = new this.userModel({
+            email,
+            passwordHash: hashedPassword,
+            name,
+            role,
+            isEmailVerified: true, // Admin-created users skip verification
+        });
+        return user.save();
     }
 }

@@ -8,7 +8,7 @@ import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @Controller('users')
 export class UsersController {
-    constructor(private readonly usersService: UsersService) {}
+    constructor(private readonly usersService: UsersService) { }
 
     @UseGuards(JwtAuthGuard)
     @Get('me')
@@ -29,5 +29,16 @@ export class UsersController {
         return this.usersService.findById(id);
     }
 
-    
+    @Post()
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
+    async createByAdmin(@Body() dto: CreateUserDto) {
+        return this.usersService.createWithRole(
+            dto.email,
+            dto.password,
+            dto.name ?? '',
+            dto.role,
+        );
+    }
+
 }
