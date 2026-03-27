@@ -37,7 +37,7 @@ const Sidebar = () => {
 
             {/* Logo */}
             <div className="p-6 border-b border-gray-100">
-                <h1 className="text-xl font-bold text-green-600">Shuggi</h1>
+                <h1 className="text-xl font-bold text-primary-600">Shuggi</h1>
                 <p className="text-xs text-gray-400 mt-0.5">Panel de administración</p>
             </div>
 
@@ -51,7 +51,7 @@ const Sidebar = () => {
                             clsx(
                                 'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
                                 isActive
-                                    ? 'bg-green-50 text-green-700'
+                                    ? 'bg-primary-50 text-primary-700'
                                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                             )
                         }

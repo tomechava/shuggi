@@ -53,7 +53,7 @@ const LoginPage = () => {
 
                 {/* Logo */}
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-green-600">Shuggi</h1>
+                    <h1 className="text-3xl font-bold text-primary-600">Shuggi</h1>
                     <p className="text-gray-500 mt-1">Portal de gestión</p>
                 </div>
 
@@ -75,7 +75,7 @@ const LoginPage = () => {
                                 type="email"
                                 autoComplete="email"
                                 placeholder="tu@email.com"
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                             />
                             {errors.email && (
                                 <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
@@ -92,7 +92,7 @@ const LoginPage = () => {
                                 type="password"
                                 autoComplete="current-password"
                                 placeholder="••••••••"
-                                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                             />
                             {errors.password && (
                                 <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
@@ -110,7 +110,7 @@ const LoginPage = () => {
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="w-full bg-green-600 hover:bg-green-700 disabled:bg-green-400 text-white font-medium py-2.5 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
+                            className="w-full bg-primary-600 hover:bg-primary-700 disabled:bg-primary-500 text-white font-medium py-2.5 rounded-lg text-sm transition-colors flex items-center justify-center gap-2"
                         >
                             {isSubmitting ? (
                                 <>

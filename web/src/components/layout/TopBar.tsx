@@ -12,8 +12,8 @@ const TopBar = () => {
                         <p className="text-sm font-medium text-gray-900">{user.name}</p>
                         <p className="text-xs text-gray-400">{ROLE_LABELS[user.role]}</p>
                     </div>
-                    <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-                        <span className="text-green-700 text-sm font-semibold">
+                    <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center">
+                        <span className="text-primary-700 text-sm font-semibold">
                             {user.name.charAt(0).toUpperCase()}
                         </span>
                     </div>
