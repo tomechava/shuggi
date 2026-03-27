@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import { ROUTES } from './routes';
 import { UserRole } from '@/types/auth.types';
+import AdminLayout from '@/components/layout/AdminLayout';
 
 // Auth pages
 import LoginPage from '@/features/auth/LoginPage';
@@ -41,16 +42,21 @@ const router = createBrowserRouter([
         path: '/admin',
         element: <ProtectedRoute allowedRoles={[UserRole.ADMIN]} />,
         children: [
-            { path: 'dashboard', element: <Placeholder title="Admin Dashboard" /> },
-            { path: 'stores', element: <Placeholder title="Stores List" /> },
-            { path: 'stores/new', element: <Placeholder title="Create Store" /> },
-            { path: 'stores/:id', element: <Placeholder title="Store Detail" /> },
-            { path: 'users', element: <Placeholder title="Users List" /> },
-            { path: 'users/new', element: <Placeholder title="Create User" /> },
-            { path: 'packs', element: <Placeholder title="Admin Packs" /> },
-            { path: 'orders', element: <Placeholder title="Admin Orders" /> },
-            { path: 'orders/:id', element: <Placeholder title="Order Detail" /> },
-            { path: 'payments', element: <Placeholder title="Payments" /> },
+            {
+                element: <AdminLayout />,
+                children: [
+                    { path: 'dashboard', element: <Placeholder title="Admin Dashboard" /> },
+                    { path: 'stores', element: <Placeholder title="Stores List" /> },
+                    { path: 'stores/new', element: <Placeholder title="Create Store" /> },
+                    { path: 'stores/:id', element: <Placeholder title="Store Detail" /> },
+                    { path: 'users', element: <Placeholder title="Users List" /> },
+                    { path: 'users/new', element: <Placeholder title="Create User" /> },
+                    { path: 'packs', element: <Placeholder title="Admin Packs" /> },
+                    { path: 'orders', element: <Placeholder title="Admin Orders" /> },
+                    { path: 'orders/:id', element: <Placeholder title="Order Detail" /> },
+                    { path: 'payments', element: <Placeholder title="Payments" /> },
+                ],
+            },
         ],
     },
 

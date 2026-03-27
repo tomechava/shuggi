@@ -165,14 +165,13 @@ export class AuthService {
         const token = this.jwtService.sign({
             sub: user.id,
             email: user.email,
+            name: user.name,
             role: user.role,
             isEmailVerified: user.isEmailVerified,
         });
 
         return {
             token,
-            // Frontend usa este flag para mostrar banner "verifica tu email"
-            // sin necesidad de decodificar el JWT
             emailVerificationRequired: !user.isEmailVerified,
         };
     }
