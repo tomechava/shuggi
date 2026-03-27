@@ -7,13 +7,15 @@ import AdminLayout from '@/components/layout/AdminLayout';
 // Auth pages
 import LoginPage from '@/features/auth/LoginPage';
 
-// Placeholders — los iremos reemplazando sprint a sprint
+// Admin pages
+import StoresListPage from '@/features/admin/stores/StoresListPage';
+
+// Placeholders
 const Placeholder = ({ title }: { title: string }) => (
     <div className="p-8 text-gray-500">🚧 {title} — próximamente</div>
 );
 
 const router = createBrowserRouter([
-    // Redirigir raíz a login
     {
         path: '/',
         element: <Navigate to={ROUTES.LOGIN} replace />,
@@ -46,7 +48,7 @@ const router = createBrowserRouter([
                 element: <AdminLayout />,
                 children: [
                     { path: 'dashboard', element: <Placeholder title="Admin Dashboard" /> },
-                    { path: 'stores', element: <Placeholder title="Stores List" /> },
+                    { path: 'stores', element: <StoresListPage /> },
                     { path: 'stores/new', element: <Placeholder title="Create Store" /> },
                     { path: 'stores/:id', element: <Placeholder title="Store Detail" /> },
                     { path: 'users', element: <Placeholder title="Users List" /> },
