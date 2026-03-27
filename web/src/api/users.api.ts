@@ -30,7 +30,7 @@ export const usersApi = {
     },
 
     create: async (data: CreateUserDto): Promise<UserItem> => {
-        const res = await apiClient.post<UserItem>('/auth/register', data);
+        const res = await apiClient.post<UserItem>('/users', data);
         return res.data;
     },
 };
