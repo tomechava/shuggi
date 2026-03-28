@@ -16,6 +16,8 @@ import CreateUserPage from '@/features/admin/users/CreateUserPage';
 import PacksListPage from '@/features/admin/packs/PacksListPage';
 import OrdersListPage from '@/features/admin/orders/OrdersListPage';
 import OrderDetailPage from '@/features/admin/orders/OrderDetailPage';
+import PaymentsPage from '@/features/admin/payments/PaymentsPage';
+import DashboardPage from '@/features/admin/dashboard/DashboardPage';
 
 // Placeholders
 const Placeholder = ({ title }: { title: string }) => (
@@ -54,7 +56,7 @@ const router = createBrowserRouter([
             {
                 element: <AdminLayout />,
                 children: [
-                    { path: 'dashboard', element: <Placeholder title="Admin Dashboard" /> },
+                    { path: 'dashboard', element: <DashboardPage /> },
                     { path: 'stores', element: <StoresListPage /> },
                     { path: 'stores/new', element: <CreateStorePage /> },
                     { path: 'stores/:id', element: <StoreDetailPage /> },
@@ -63,7 +65,7 @@ const router = createBrowserRouter([
                     { path: 'packs', element: <PacksListPage /> },
                     { path: 'orders', element: <OrdersListPage /> },
                     { path: 'orders/:id', element: <OrderDetailPage /> },
-                    { path: 'payments', element: <Placeholder title="Payments" /> },
+                    { path: 'payments', element: <PaymentsPage /> },
                 ],
             },
         ],
