@@ -243,6 +243,28 @@ export class OrdersService {
     }
 
     /**
+ * ADMIN: Get order by ID (no ownership check)
+ */
+    async findByIdAdmin(orderId: string): Promise<Order> {
+        if (!Types.ObjectId.isValid(orderId)) {
+            throw new BadRequestException('Invalid order ID');
+        }
+
+        const order = await this.orderModel
+            .findById(orderId)
+            .populate('user', 'name email')
+            .populate('pack', 'name description')
+            .populate('store', 'name address contact')
+            .exec();
+
+        if (!order) {
+            throw new NotFoundException('Order not found');
+        }
+
+        return order;
+    }
+
+    /**
      * STORE: Get orders for my store
      */
     async findByStore(storeId: string, filters?: OrderFiltersDto): Promise<Order[]> {

@@ -121,6 +121,17 @@ export class OrdersController {
     }
 
     /**
+ * ADMIN: Get order by ID
+ * GET /orders/admin/:id
+ */
+    @Get('admin/:id')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(UserRole.ADMIN)
+    async getOrderByIdAdmin(@Param('id') id: string) {
+        return this.ordersService.findByIdAdmin(id);
+    }
+
+    /**
      * ADMIN: Update order status
      * PATCH /orders/admin/:id/status
      */

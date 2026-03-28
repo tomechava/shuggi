@@ -13,6 +13,9 @@ import StoreDetailPage from '@/features/admin/stores/StoreDetailPage';
 import CreateStorePage from '@/features/admin/stores/CreateStorePage';
 import UsersListPage from '@/features/admin/users/UsersListPage';
 import CreateUserPage from '@/features/admin/users/CreateUserPage';
+import PacksListPage from '@/features/admin/packs/PacksListPage';
+import OrdersListPage from '@/features/admin/orders/OrdersListPage';
+import OrderDetailPage from '@/features/admin/orders/OrderDetailPage';
 
 // Placeholders
 const Placeholder = ({ title }: { title: string }) => (
@@ -57,9 +60,9 @@ const router = createBrowserRouter([
                     { path: 'stores/:id', element: <StoreDetailPage /> },
                     { path: 'users', element: <UsersListPage /> },
                     { path: 'users/new', element: <CreateUserPage /> },
-                    { path: 'packs', element: <Placeholder title="Admin Packs" /> },
-                    { path: 'orders', element: <Placeholder title="Admin Orders" /> },
-                    { path: 'orders/:id', element: <Placeholder title="Order Detail" /> },
+                    { path: 'packs', element: <PacksListPage /> },
+                    { path: 'orders', element: <OrdersListPage /> },
+                    { path: 'orders/:id', element: <OrderDetailPage /> },
                     { path: 'payments', element: <Placeholder title="Payments" /> },
                 ],
             },
