@@ -19,6 +19,10 @@ import OrderDetailPage from '@/features/admin/orders/OrderDetailPage';
 import PaymentsPage from '@/features/admin/payments/PaymentsPage';
 import DashboardPage from '@/features/admin/dashboard/DashboardPage';
 
+//Store pages
+import StoreLayout from '@/components/layout/StoreLayout';
+import StoreProfilePage from '@/features/store/profile/StoreProfilePage';
+
 // Placeholders
 const Placeholder = ({ title }: { title: string }) => (
     <div className="p-8 text-gray-500">🚧 {title} — próximamente</div>
@@ -76,13 +80,18 @@ const router = createBrowserRouter([
         path: '/store',
         element: <ProtectedRoute allowedRoles={[UserRole.STORE]} />,
         children: [
-            { path: 'dashboard', element: <Placeholder title="Store Dashboard" /> },
-            { path: 'profile', element: <Placeholder title="Store Profile" /> },
-            { path: 'packs', element: <Placeholder title="Store Packs" /> },
-            { path: 'packs/new', element: <Placeholder title="Create Pack" /> },
-            { path: 'packs/:id/edit', element: <Placeholder title="Edit Pack" /> },
-            { path: 'orders', element: <Placeholder title="Store Orders" /> },
-            { path: 'pickup', element: <Placeholder title="Pickup Scanner" /> },
+            {
+                element: <StoreLayout />,
+                children: [
+                    { path: 'dashboard', element: <Placeholder title="Store Dashboard" /> },
+                    { path: 'profile', element: <StoreProfilePage /> },
+                    { path: 'packs', element: <Placeholder title="Store Packs" /> },
+                    { path: 'packs/new', element: <Placeholder title="Create Pack" /> },
+                    { path: 'packs/:id/edit', element: <Placeholder title="Edit Pack" /> },
+                    { path: 'orders', element: <Placeholder title="Store Orders" /> },
+                    { path: 'pickup', element: <Placeholder title="Pickup Scanner" /> },
+                ],
+            },
         ],
     },
 ]);
